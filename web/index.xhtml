@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <meta charset="utf-8"></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
@@ -1002,11 +1003,11 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#panel7" role="tab"><i class="fas fa-user mr-1"></i>
+                                <a class="nav-link active" data-toggle="tab" href="#panel7" role="tab"><i class="fa fa-user-o mr-1"></i>
                                     Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#panel8" role="tab"><i class="fas fa-user-plus mr-1"></i>
+                                <a class="nav-link" data-toggle="tab" href="#panel8" role="tab"><i class="fa fa-user-plus mr-1"></i>
                                     Register</a>
                             </li>
                         </ul>
@@ -1014,31 +1015,39 @@
                         <!-- Tab panels -->
                         <div class="tab-content">
                             <!--Panel 7-->
-                            <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
+                            <div class="tab-pane active" id="panel7" role="tabpanel">
 
-                                <!--Body-->
-                                <div class="modal-body mb-1">
-                                    <div class="md-form form-sm mb-5">
-                                        <i class="fas fa-envelope prefix"></i>
-                                        <input type="email" id="modalLRInput10" class="form-control form-control-sm validate"></input>
-                                        <label data-error="wrong" data-success="right" for="modalLRInput10">Your email</label>
-                                    </div>
+                                <h:form id="frmLogin">                                    
+                                    <!--Body-->
+                                    <div class="modal-body mb-1">
+                                        <div class="md-form form-sm mb-5">
+                                            <i class="fa fa-envelope prefix"></i>
+                                            <h:inputText value="#{loginBean.user}" style="text-transform: uppercase" requiredMessage="Por favor ingrese su nombre de usuario." 
+                                                         autocomplete="false" class="form-control " id="txtuser" required="true">
+                                            </h:inputText>
+                                            <label data-error="wrong" data-success="right" for="modalLRInput10">Your email</label>
+                                        </div>
 
-                                    <div class="md-form form-sm mb-4">
-                                        <i class="fas fa-lock prefix"></i>
-                                        <input type="password" id="modalLRInput11" class="form-control form-control-sm validate"></input>
+                                        <div class="md-form form-sm mb-4">
+                                            <i class="fa fa-lock prefix"></i>
+                                            <h:inputSecret value="#{loginBean.pass}" validatorMessage="Formato de contraseña inválida. No se permiten carácteres especiales." 
+                                                           requiredMessage="Por favor ingrese su contraseña." autocomplete="false" id="txtPass" class="form-control " required="true">
+                                            </h:inputSecret>
                                             <label data-error="wrong" data-success="right" for="modalLRInput11">Your password</label>
+                                        </div>
+                                        <div class="text-center mt-2">
+                                            <h:commandButton action="#{loginBean.autenticar}" class="btn btn-info btn-submit right" value="Iniciar Sesión">
+                                                <f:ajax execute="frmLogin:txtuser frmLogin:txtPass"></f:ajax>
+                                            </h:commandButton>
+                                        </div>
                                     </div>
-                                    <div class="text-center mt-2">
-                                        <button class="btn btn-info">Log in <i class="fas fa-sign-in ml-1"></i></button>
-                                    </div>
-                                </div>
+                                </h:form>
                                 <!--Footer-->
                                 <div class="modal-footer">
-                                    <div class="options text-center text-md-right mt-1">
-                                        <p>Not a member? <a href="#" class="blue-text">Sign Up</a></p>
-                                        <p>Forgot <a href="#" class="blue-text">Password?</a></p>
-                                    </div>
+                                    <!--                                    <div class="options text-center text-md-right mt-1">
+                                                                            <p>Not a member? <a href="#" class="blue-text">Sign Up</a></p>
+                                                                            <p>Forgot <a href="#" class="blue-text">Password?</a></p>
+                                                                        </div>-->
                                     <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
                                 </div>
 
@@ -1046,35 +1055,81 @@
                             <!--/.Panel 7-->
 
                             <!--Panel 8-->
-                            <div class="tab-pane fade" id="panel8" role="tabpanel">
+                            <div class="tab-pane" id="panel8" role="tabpanel">
 
                                 <!--Body-->
                                 <div class="modal-body">
-                                    <div class="md-form form-sm mb-5">
-                                        <i class="fas fa-envelope prefix"></i>
-                                        <input type="email" id="modalLRInput12" class="form-control form-control-sm validate"></input>
-                                            <label data-error="wrong" data-success="right" for="modalLRInput12">Your email</label>
-                                    </div>
+                                    <div>
+                                        <h:form id="frmRegistrar">
+                                            <div class="col-md-6 md-form form-sm mb-5">
+                                                <label data-error="wrong" data-success="right" for="modalLRInput13">Primer nombre</label>
+                                                <h:inputText value="#{loginBean.personas.pernombre1}" style="text-transform: uppercase" requiredMessage="Por favor ingrese su nombre de usuario." 
+                                                             autocomplete="false" class="form-control " id="txtNombre1" required="true">
+                                                </h:inputText>
+                                            </div>
+                                            <div class="col-md-6 md-form form-sm mb-5">
+                                                <label data-error="wrong" data-success="right" for="modalLRInput13">Segundo nombre</label>
+                                                <h:inputText value="#{loginBean.user}" style="text-transform: uppercase" requiredMessage="Por favor ingrese su nombre de usuario." 
+                                                             autocomplete="false" class="form-control " id="txtNombre2" required="true">
+                                                </h:inputText>
+                                            </div>
+                                            <div class="col-md-6 md-form form-sm mb-5">
+                                                <label data-error="wrong" data-success="right" for="modalLRInput13">Primer Apellido</label>
+                                                <h:inputText value="#{loginBean.user}" style="text-transform: uppercase" requiredMessage="Por favor ingrese su nombre de usuario." 
+                                                             autocomplete="false" class="form-control " id="txtApellido1" required="true">
+                                                </h:inputText>
+                                            </div>
+                                            <div class="col-md-6 md-form form-sm mb-5">
+                                                <label data-error="wrong" data-success="right" for="modalLRInput13">Segundo Apellido</label>
+                                                <h:inputText value="#{loginBean.user}" style="text-transform: uppercase" requiredMessage="Por favor ingrese su nombre de usuario." 
+                                                             autocomplete="false" class="form-control " id="txtApellido2" required="true">
+                                                </h:inputText>
+                                            </div>
 
-                                    <div class="md-form form-sm mb-5">
-                                        <i class="fas fa-lock prefix"></i>
-                                        <input type="password" id="modalLRInput13" class="form-control form-control-sm validate"></input>
-                                            <label data-error="wrong" data-success="right" for="modalLRInput13">Your password</label>
-                                    </div>
+                                            <div class="col-md-6">
+                                                <label data-error="wrong" data-success="right" for="modalLRInput12">Tipo de Documento</label>
+                                                <h:selectOneMenu  id="sltDocumentos" class="form-control" value="#{loginBean.tipoDocPer}">
+                                                    <f:selectItems value="#{loginBean.tiposdocumentos}" var="tipoDocumento" itemValue="#{tipoDocumento.tipdocid}" itemLabel="#{tipoDocumento.tipdocdescripcion}"></f:selectItems>
+                                                </h:selectOneMenu>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label data-error="wrong" data-success="right" for="modalLRInput12">N° Documento</label>
+                                                <h:inputText value="#{loginBean.user}" style="text-transform: uppercase" requiredMessage="Por favor ingrese su nombre de usuario." 
+                                                             class="form-control " id="txtDocumento" required="true">
+                                                </h:inputText>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label data-error="wrong" data-success="right" for="modalLRInput12">E-mail.</label>
+                                                <h:inputText value="#{loginBean.user}" style="text-transform: uppercase" requiredMessage="Por favor ingrese su nombre de usuario." 
+                                                             class="form-control" id="txtEmail" required="true">
+                                                </h:inputText>
+                                            </div>
 
-                                    <div class="md-form form-sm mb-4">
-                                        <i class="fas fa-lock prefix"></i>
-                                        <input type="password" id="modalLRInput14" class="form-control form-control-sm validate"></input>
-                                            <label data-error="wrong" data-success="right" for="modalLRInput14">Repeat password</label>
-                                    </div>
+                                            <div class="col-md-6 md-form form-sm mb-4">
+                                                <label data-error="wrong" data-success="right" for="modalLRInput14">Contraseña</label>
+                                                <h:inputSecret value="#{loginBean.pass}" validatorMessage="Formato de contraseña inválida. No se permiten carácteres especiales." 
+                                                               requiredMessage="Por favor ingrese su contraseña." autocomplete="false" id="txtPass" class="form-control " required="true">
+                                                </h:inputSecret>
+                                            </div> 
+                                            <br/>
 
-                                    <div class="text-center form-sm mt-2">
-                                        <button class="btn btn-info">Sign up <i class="fas fa-sign-in ml-1"></i></button>
-                                    </div>
 
+
+                                            <!--                                        <div class="text-center form-sm mt-2">
+                                                                                        <button class="btn btn-info">Sign up <i class="fa fa-sign-in ml-1"></i></button>
+                                                                                    </div>-->
+                                            <div class="options text-right">
+                                                <label>&nbsp;</label>
+                                                <h:commandLink class="btn btn-info" value="Registrar" >
+                                                    <f:ajax event="click" execute="frmRegistra" listener="#{loginBean.registrarUser()}"></f:ajax>
+                                                </h:commandLink>
+                                            </div>
+                                        </h:form>
+                                    </div>
                                 </div>
                                 <!--Footer-->
                                 <div class="modal-footer">
+
                                     <div class="options text-right">
                                         <p class="pt-1">Already have an account? <a href="#" class="blue-text">Log In</a></p>
                                     </div>

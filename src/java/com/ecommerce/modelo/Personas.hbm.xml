@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/10/2019 07:41:37 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.ecommerce.modelo.Personas" table="personas" schema="public" optimistic-lock="version">
+        <id name="perid" type="int">
+            <column name="perid" />
+            <generator class="increment" />
+        </id>
+        <many-to-one name="estadospersona" class="com.ecommerce.modelo.Estadospersona" fetch="select">
+            <column name="estperid" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposdocumento" class="com.ecommerce.modelo.Tiposdocumento" fetch="select">
+            <column name="tipdocid" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tipossexo" class="com.ecommerce.modelo.Tipossexo" fetch="select">
+            <column name="tipsexid" not-null="true" />
+        </many-to-one>
+        <property name="pernombre1" type="string">
+            <column name="pernombre1" not-null="true" />
+        </property>
+        <property name="pernombre2" type="string">
+            <column name="pernombre2" />
+        </property>
+        <property name="perapellido1" type="string">
+            <column name="perapellido1" not-null="true" />
+        </property>
+        <property name="perapellido2" type="string">
+            <column name="perapellido2" not-null="true" />
+        </property>
+        <property name="perfechacreacion" type="date">
+            <column name="perfechacreacion" length="13" not-null="true" />
+        </property>
+        <property name="perdocumento" type="string">
+            <column name="perdocumento" not-null="true" />
+        </property>
+        <set name="usuarioses" table="usuarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="perid" not-null="true" />
+            </key>
+            <one-to-many class="com.ecommerce.modelo.Usuarios" />
+        </set>
+        <set name="datospersonas" table="datospersona" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="perid" not-null="true" />
+            </key>
+            <one-to-many class="com.ecommerce.modelo.Datospersona" />
+        </set>
+    </class>
+</hibernate-mapping>

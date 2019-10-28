@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/10/2019 07:41:37 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.ecommerce.modelo.Usuarios" table="usuarios" schema="public" optimistic-lock="version">
+        <id name="usuid" type="int">
+            <column name="usuid" />
+            <generator class="increment" />
+        </id>
+        <many-to-one name="estadosusuario" class="com.ecommerce.modelo.Estadosusuario" fetch="select">
+            <column name="estusuid" not-null="true" />
+        </many-to-one>
+        <many-to-one name="personas" class="com.ecommerce.modelo.Personas" fetch="select">
+            <column name="perid" not-null="true" />
+        </many-to-one>
+        <many-to-one name="roles" class="com.ecommerce.modelo.Roles" fetch="select">
+            <column name="rolid" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposusuario" class="com.ecommerce.modelo.Tiposusuario" fetch="select">
+            <column name="tipusuid" not-null="true" />
+        </many-to-one>
+        <property name="usunombre" type="string">
+            <column name="usunombre" length="100" not-null="true" />
+        </property>
+        <property name="usupass" type="string">
+            <column name="usupass" length="100" not-null="true" />
+        </property>
+        <property name="usufechacreacion" type="date">
+            <column name="usufechacreacion" length="13" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

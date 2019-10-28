@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/10/2019 07:41:37 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.ecommerce.modelo.Datospersona" table="datospersona" schema="public" optimistic-lock="version">
+        <id name="datperid" type="int">
+            <column name="datperid" />
+            <generator class="increment" />
+        </id>
+        <many-to-one name="estadosdatospersona" class="com.ecommerce.modelo.Estadosdatospersona" fetch="select">
+            <column name="estdatperid" not-null="true" />
+        </many-to-one>
+        <many-to-one name="personas" class="com.ecommerce.modelo.Personas" fetch="select">
+            <column name="perid" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposdatopersona" class="com.ecommerce.modelo.Tiposdatopersona" fetch="select">
+            <column name="tipdatperid" not-null="true" />
+        </many-to-one>
+        <property name="datperdescripcion" type="string">
+            <column name="datperdescripcion" length="200" not-null="true" />
+        </property>
+        <property name="datperfecharegistro" type="date">
+            <column name="datperfecharegistro" length="13" not-null="true" />
+        </property>
+        <property name="datperfechainactivo" type="date">
+            <column name="datperfechainactivo" length="13" />
+        </property>
+    </class>
+</hibernate-mapping>
