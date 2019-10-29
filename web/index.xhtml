@@ -960,20 +960,20 @@
                                             </div>
                                             <div class="col-md-6 md-form form-sm mb-5">
                                                 <label data-error="wrong" data-success="right" for="modalLRInput13">Segundo nombre</label>
-                                                <h:inputText value="#{loginBean.user}" style="text-transform: uppercase" requiredMessage="Por favor ingrese su nombre de usuario." 
-                                                             autocomplete="false" class="form-control " id="txtNombre2" required="true">
+                                                <h:inputText value="#{loginBean.personas.pernombre2}" style="text-transform: uppercase" 
+                                                             autocomplete="false" class="form-control " id="txtNombre2" >
                                                 </h:inputText>
                                             </div>
                                             <div class="col-md-6 md-form form-sm mb-5">
                                                 <label data-error="wrong" data-success="right" for="modalLRInput13">Primer Apellido</label>
-                                                <h:inputText value="#{loginBean.user}" style="text-transform: uppercase" requiredMessage="Por favor ingrese su nombre de usuario." 
+                                                <h:inputText value="#{loginBean.personas.perapellido1}" style="text-transform: uppercase" requiredMessage="Por favor ingrese su nombre de usuario." 
                                                              autocomplete="false" class="form-control " id="txtApellido1" required="true">
                                                 </h:inputText>
                                             </div>
                                             <div class="col-md-6 md-form form-sm mb-5">
                                                 <label data-error="wrong" data-success="right" for="modalLRInput13">Segundo Apellido</label>
-                                                <h:inputText value="#{loginBean.user}" style="text-transform: uppercase" requiredMessage="Por favor ingrese su nombre de usuario." 
-                                                             autocomplete="false" class="form-control " id="txtApellido2" required="true">
+                                                <h:inputText value="#{loginBean.personas.perapellido2}" style="text-transform: uppercase" 
+                                                             autocomplete="false" class="form-control " id="txtApellido2" >
                                                 </h:inputText>
                                             </div>
 
@@ -985,7 +985,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <label data-error="wrong" data-success="right" for="modalLRInput12">N° Documento</label>
-                                                <h:inputText value="#{loginBean.user}" style="text-transform: uppercase" requiredMessage="Por favor ingrese su nombre de usuario." 
+                                                <h:inputText value="#{loginBean.personas.perdocumento}" style="text-transform: uppercase" requiredMessage="Por favor ingrese su nombre de usuario." 
                                                              class="form-control " id="txtDocumento" required="true">
                                                 </h:inputText>
                                             </div>
@@ -1012,7 +1012,8 @@
                                             <div class="options text-right">
                                                 <label>&nbsp;</label>
                                                 <h:commandLink class="btn btn-info" value="Registrar" >
-                                                    <f:ajax event="click" execute="frmRegistra" listener="#{loginBean.registrarUser()}"></f:ajax>
+                                                    <f:ajax event="click" execute="frmRegistrar:txtNombre1 frmRegistrar:txtNombre2 frmRegistrar:txtApellido1 frmRegistrar:txtApellido2 frmRegistrar:sltDocumentos
+                                                            frmRegistrar:txtDocumento frmRegistrar:txtEmail frmRegistrar:txtPass" listener="#{loginBean.registrarUser()}"></f:ajax>
                                                 </h:commandLink>
                                             </div>
                                         </h:form>

@@ -5,6 +5,7 @@
  */
 package com.ecommerce.dao;
 
+import com.ecommerce.modelo.Personas;
 import com.ecommerce.modelo.Tiposdocumento;
 import com.ecommerce.modelo.Usuarios;
 import java.util.List;
@@ -19,4 +20,6 @@ public interface ConsultasIT {
     Usuarios getUser(Session session, String user, String pass) throws Exception;
 
     List<Tiposdocumento> allTiposDocumento(Session s) throws Exception;
+
+    Personas getPersona(Session s, int tipoDoc, String documento)throws Exception;
 }

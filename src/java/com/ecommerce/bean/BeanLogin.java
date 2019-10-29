@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -36,6 +37,7 @@ public class BeanLogin {
         try {
             setLoginBo(new LoginBo());
             getLoginBo().getAllTipoDoc(this);
+            setPersonas(new Personas());
         } catch (Exception ex) {
             ex.printStackTrace();
             Logger.getLogger(BeanLogin.class.getName()).log(Level.SEVERE, null, ex);
@@ -53,7 +55,9 @@ public class BeanLogin {
 
     public void registrarUser() {
         try {
-
+            if (getLoginBo().registrarPersona(this)) {
+                RequestContext.getCurrentInstance().execute("alert('Persona registrada exitosamente');");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
