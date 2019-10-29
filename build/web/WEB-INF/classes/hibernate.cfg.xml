@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-  <session-factory>
-    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/ecommerce</property>
-    <property name="hibernate.connection.username">postgres</property>
-    <property name="hibernate.connection.password">desarrollo2019</property>
-  </session-factory>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://10.10.2.205:5432/ecommerce</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">123456789</property>
+        <mapping resource="com/ecommerce/modelo/Tiposdatopersona.hbm.xml"/>
+        <mapping resource="com/ecommerce/modelo/Estadospersona.hbm.xml"/>
+        <mapping resource="com/ecommerce/modelo/Tipossexo.hbm.xml"/>
+        <mapping resource="com/ecommerce/modelo/Roles.hbm.xml"/>
+        <mapping resource="com/ecommerce/modelo/Estadosusuario.hbm.xml"/>
+        <mapping resource="com/ecommerce/modelo/Personas.hbm.xml"/>
+        <mapping resource="com/ecommerce/modelo/Datospersona.hbm.xml"/>
+        <mapping resource="com/ecommerce/modelo/Usuarios.hbm.xml"/>
+        <mapping resource="com/ecommerce/modelo/Tiposusuario.hbm.xml"/>
+        <mapping resource="com/ecommerce/modelo/Estadosdatospersona.hbm.xml"/>
+        <mapping resource="com/ecommerce/modelo/Tiposdocumento.hbm.xml"/>
+    </session-factory>
 </hibernate-configuration>

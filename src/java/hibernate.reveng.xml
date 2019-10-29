@@ -52,4 +52,5 @@ Contributor(s):
     <table-filter match-name="datospersona"/>
     <table-filter match-name="tiposdocumento"/>
     <table-filter match-name="usuarios"/>
+   
 </hibernate-reverse-engineering>
