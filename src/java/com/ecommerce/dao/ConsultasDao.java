@@ -5,6 +5,7 @@
  */
 package com.ecommerce.dao;
 
+import com.ecommerce.modelo.Personas;
 import com.ecommerce.modelo.Imagenes;
 import com.ecommerce.modelo.Tiposdocumento;
 import com.ecommerce.modelo.Usuarios;
@@ -41,6 +42,18 @@ public class ConsultasDao implements ConsultasIT {
         String hql = "from Tiposdocumento order by 1 asc";
         Query query = s.createQuery(hql);
         return query.list();
+    }
+
+    @Override
+    public Personas getPersona(Session s, int tipoDoc, String documento) throws Exception {
+        String hql = "from Personas where  tiposdocumento.tipdocid=:tipoDoc and perdocumento=:doc";
+        Query q = s.createQuery(hql);
+        q.setString("doc", documento);
+        q.setInteger("tipoDoc", tipoDoc);
+        if (q.list().isEmpty()) {
+            return null;
+        }
+        return (Personas) q.list().get(0);
     }
 
 }
