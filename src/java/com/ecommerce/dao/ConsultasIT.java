@@ -19,4 +19,7 @@ public interface ConsultasIT {
     Usuarios getUser(Session session, String user, String pass) throws Exception;
 
     List<Tiposdocumento> allTiposDocumento(Session s) throws Exception;
+    
+    
+    String getUrl(String codigo, Session session) throws Exception;
 }

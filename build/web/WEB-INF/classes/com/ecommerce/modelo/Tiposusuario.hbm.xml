@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/10/2019 07:41:37 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.ecommerce.modelo.Tiposusuario" table="tiposusuario" schema="public" optimistic-lock="version">
+        <id name="tipusuid" type="int">
+            <column name="tipusuid" />
+            <generator class="increment" />
+        </id>
+        <property name="tipusudescripcion" type="string">
+            <column name="tipusudescripcion" length="100" not-null="true" />
+        </property>
+        <property name="tipusufechacreacion" type="date">
+            <column name="tipusufechacreacion" length="13" not-null="true" />
+        </property>
+        <property name="tipusufechainactivo" type="date">
+            <column name="tipusufechainactivo" length="13" />
+        </property>
+        <property name="tipusuactivo" type="boolean">
+            <column name="tipusuactivo" not-null="true" />
+        </property>
+        <set name="usuarioses" table="usuarios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipusuid" not-null="true" />
+            </key>
+            <one-to-many class="com.ecommerce.modelo.Usuarios" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/10/2019 07:41:37 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.ecommerce.modelo.Estadospersona" table="estadospersona" schema="public" optimistic-lock="version">
+        <id name="estperid" type="int">
+            <column name="estperid" />
+            <generator class="increment" />
+        </id>
+        <property name="estperdescripcion" type="string">
+            <column name="estperdescripcion" length="100" not-null="true" />
+        </property>
+        <property name="estperfechacreacion" type="date">
+            <column name="estperfechacreacion" length="13" not-null="true" />
+        </property>
+        <property name="estperfechainactivo" type="date">
+            <column name="estperfechainactivo" length="13" />
+        </property>
+        <property name="estperactivo" type="boolean">
+            <column name="estperactivo" not-null="true" />
+        </property>
+        <set name="personases" table="personas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="estperid" not-null="true" />
+            </key>
+            <one-to-many class="com.ecommerce.modelo.Personas" />
+        </set>
+    </class>
+</hibernate-mapping>

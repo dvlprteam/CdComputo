@@ -5,6 +5,7 @@
  */
 package com.ecommerce.dao;
 
+import com.ecommerce.modelo.Imagenes;
 import com.ecommerce.modelo.Tiposdocumento;
 import com.ecommerce.modelo.Usuarios;
 import java.util.List;
@@ -16,6 +17,15 @@ import org.hibernate.Session;
  * @author emadrid
  */
 public class ConsultasDao implements ConsultasIT {
+
+    @Override
+    public String getUrl(String codigo, Session session) throws Exception {
+        String hql = "from Imagenes where codigo = :codigo";
+        Query query = session.createQuery(hql);
+        query.setString("codigo", codigo);
+        Imagenes imagenes = (Imagenes) query.uniqueResult();
+        return (imagenes != null) ? imagenes.getUrl() : "";
+    }
 
     @Override
     public Usuarios getUser(Session session, String user, String pass) throws Exception {

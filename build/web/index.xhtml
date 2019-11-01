@@ -1,7 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
     <h:head>
         <meta charset="utf-8"></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
@@ -83,39 +86,32 @@
                         <div class="col-md-3 clearfix">
                             <div class="header-ctn">
                                 <!-- Cart -->
-                                <div class="dropdown">
+                                <div class="dropdown" jsf:id="contCar">
                                     <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                         <i class="fa fa-shopping-cart"></i>
                                         <span>Your Cart</span>
-                                        <div class="qty">3</div>
+                                        <div class="qty" >#{indexBeans.productCar.size()}</div>
                                     </a>
                                     <div class="cart-dropdown">
                                         <div class="cart-list">
-                                            <div class="product-widget">
-                                                <div class="product-img">
-                                                    <img src="./img/product01.png" alt=""></img>
+                                            <ui:repeat var="carProduct" value="#{indexBeans.productCar}">
+                                                <div class="product-widget">
+                                                    <div class="product-img">
+                                                        <img src="#{carProduct.url}" alt=""></img>
+                                                    </div>
+                                                    <div class="product-body">
+                                                        <h3 class="product-name"><a href="#">#{carProduct.arti_descripcion}</a></h3>
+                                                        <h4 class="product-price"><span class="qty">1x</span>#{carProduct.arti_precioventa1}</h4>
+                                                    </div>
+                                                    <button class="delete"><i class="fa fa-close"></i></button>
                                                 </div>
-                                                <div class="product-body">
-                                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                                    <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-                                                </div>
-                                                <button class="delete"><i class="fa fa-close"></i></button>
-                                            </div>
+                                            </ui:repeat>
 
-                                            <div class="product-widget">
-                                                <div class="product-img">
-                                                    <img src="./img/product02.png" alt=""></img>
-                                                </div>
-                                                <div class="product-body">
-                                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                                    <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-                                                </div>
-                                                <button class="delete"><i class="fa fa-close"></i></button>
-                                            </div>
+
                                         </div>
                                         <div class="cart-summary">
-                                            <small>3 Item(s) selected</small>
-                                            <h5>SUBTOTAL: $2940.00</h5>
+                                            <small>#{indexBeans.productCar.size()} Item(s) seleccionado</small>
+                                            <h5>SUBTOTAL: #{indexBeans.subTotal}</h5>
                                         </div>
                                         <div class="cart-btns">
                                             <a href="#">View Cart</a>
@@ -145,187 +141,83 @@
         </header>
         <!-- /HEADER -->
 
+        <h:form>
+            <!-- SECTION -->
+            <div class="section">
+                <!-- container -->
+                <div class="container">
+                    <!-- row -->
+                    <div class="row">
 
-        <!-- SECTION -->
-        <div class="section">
-            <!-- container -->
-            <div class="container">
-                <!-- row -->
-                <div class="row">
-
-                    <!-- section title -->
-                    <div class="col-md-12">
-                        <div class="section-title">
-                            <h3 class="title">Productos</h3>
-                        </div>
-                    </div>
-                    <!-- /section title -->
-
-                    <!-- Products tab & slick -->
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="products-tabs">
-                                <!-- tab -->
-                                <div id="tab1" class="tab-pane active">
-                                    <div class="products-slick" data-nav="#slick-nav-1">
-                                        <!-- product -->
-                                        <div class="product">
-                                            <div class="product-img">
-                                                <img src="./img/product01.png" alt=""></img>
-                                                <div class="product-label">
-                                                    <span class="sale">-30%</span>
-                                                    <span class="new">NEW</span>
-                                                </div>
-                                            </div>
-                                            <div class="product-body">
-                                                <p class="product-category">Category</p>
-                                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                                <div class="product-rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                                <div class="product-btns">
-                                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                                                </div>
-                                            </div>
-                                            <div class="add-to-cart">
-                                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                                            </div>
-                                        </div>
-                                        <!-- /product -->
-
-                                        <!-- product -->
-                                        <div class="product">
-                                            <div class="product-img">
-                                                <img src="./img/product02.png" alt=""></img>
-                                                <div class="product-label">
-                                                    <span class="new">NEW</span>
-                                                </div>
-                                            </div>
-                                            <div class="product-body">
-                                                <p class="product-category">Category</p>
-                                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                                <div class="product-rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                </div>
-                                                <div class="product-btns">
-                                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                                                </div>
-                                            </div>
-                                            <div class="add-to-cart">
-                                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                                            </div>
-                                        </div>
-                                        <!-- /product -->
-
-                                        <!-- product -->
-                                        <div class="product">
-                                            <div class="product-img">
-                                                <img src="./img/product03.png" alt=""></img>
-                                                <div class="product-label">
-                                                    <span class="sale">-30%</span>
-                                                </div>
-                                            </div>
-                                            <div class="product-body">
-                                                <p class="product-category">Category</p>
-                                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                                <div class="product-rating">
-                                                </div>
-                                                <div class="product-btns">
-                                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                                                </div>
-                                            </div>
-                                            <div class="add-to-cart">
-                                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                                            </div>
-                                        </div>
-                                        <!-- /product -->
-
-                                        <!-- product -->
-                                        <div class="product">
-                                            <div class="product-img">
-                                                <img src="./img/product04.png" alt=""></img>
-                                            </div>
-                                            <div class="product-body">
-                                                <p class="product-category">Category</p>
-                                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                                <div class="product-rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                                <div class="product-btns">
-                                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                                                </div>
-                                            </div>
-                                            <div class="add-to-cart">
-                                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                                            </div>
-                                        </div>
-                                        <!-- /product -->
-
-                                        <!-- product -->
-                                        <div class="product">
-                                            <div class="product-img">
-                                                <img src="./img/product05.png" alt=""></img>
-                                            </div>
-                                            <div class="product-body">
-                                                <p class="product-category">Category</p>
-                                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                                <div class="product-rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                                <div class="product-btns">
-                                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                                                </div>
-                                            </div>
-                                            <div class="add-to-cart">
-                                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                                            </div>
-                                        </div>
-                                        <!-- /product -->
-                                    </div>
-                                    <div id="slick-nav-1" class="products-slick-nav"></div>
-                                </div>
-                                <!-- /tab -->
+                        <!-- section title -->
+                        <div class="col-md-12">
+                            <div class="section-title">
+                                <h3 class="title">Productos</h3>
                             </div>
                         </div>
+                        <!-- /section title -->
+
+                        <!-- Products tab & slick -->
+
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="products-tabs">
+                                    <!-- tab -->
+                                    <div id="tab1" class="tab-pane active">
+                                        <div class="products-slick" data-nav="#slick-nav-1">
+                                            <!-- product -->
+                                            <ui:repeat var="product" value="#{indexBeans.productUrls}">
+                                                <div class="product">
+                                                    <div class="product-img">
+                                                        <img src="#{product.url}" alt=""></img>
+                                                        <div class="product-label">
+                                                            <span class="sale">-30%</span>
+                                                            <span class="new">NEW</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product-body">
+                                                        <p class="product-category">Category</p>
+
+                                                        <h3 class="product-name"><a href="#">#{product.arti_descripcion}</a></h3>
+                                                        <h4 class="product-price">#{product.arti_precioventa1}<del class="product-old-price">#{product.arti_precioventa2}</del></h4>
+                                                        <div class="product-rating">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                        </div>
+                                                        <div class="product-btns">
+                                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+                                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="add-to-cart">
+                                                        <h:commandLink class="add-to-cart-btn">
+                                                            <f:ajax event="click" listener="#{indexBeans.addCar(product)}" render="contCar"></f:ajax>
+                                                            <i class="fa fa-shopping-cart"></i> add to cart
+                                                        </h:commandLink>
+                                                    </div>
+                                                </div>
+                                            </ui:repeat>    
+                                            <!-- /product -->
+                                        </div>
+                                        <div id="slick-nav-1" class="products-slick-nav"></div>
+                                    </div>
+                                    <!-- /tab -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Products tab & slick -->
                     </div>
-                    <!-- Products tab & slick -->
+                    <!-- /row -->
                 </div>
-                <!-- /row -->
+                <!-- /container -->
             </div>
-            <!-- /container -->
-        </div>
-        <!-- /SECTION -->
+            <!-- /SECTION -->
+        </h:form>
+
 
         <!-- HOT DEAL SECTION -->
         <div id="hot-deal" class="section">
@@ -1002,11 +894,11 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#panel7" role="tab"><i class="fas fa-user mr-1"></i>
+                                <a class="nav-link active" data-toggle="tab" href="#panel7" role="tab"><i class="fa fa-user-o mr-1"></i>
                                     Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#panel8" role="tab"><i class="fas fa-user-plus mr-1"></i>
+                                <a class="nav-link" data-toggle="tab" href="#panel8" role="tab"><i class="fa fa-user-plus mr-1"></i>
                                     Register</a>
                             </li>
                         </ul>
@@ -1014,31 +906,39 @@
                         <!-- Tab panels -->
                         <div class="tab-content">
                             <!--Panel 7-->
-                            <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
+                            <div class="tab-pane active" id="panel7" role="tabpanel">
 
-                                <!--Body-->
-                                <div class="modal-body mb-1">
-                                    <div class="md-form form-sm mb-5">
-                                        <i class="fas fa-envelope prefix"></i>
-                                        <input type="email" id="modalLRInput10" class="form-control form-control-sm validate"></input>
-                                        <label data-error="wrong" data-success="right" for="modalLRInput10">Your email</label>
-                                    </div>
+                                <h:form id="frmLogin">                                    
+                                    <!--Body-->
+                                    <div class="modal-body mb-1">
+                                        <div class="md-form form-sm mb-5">
+                                            <i class="fa fa-envelope prefix"></i>
+                                            <h:inputText value="#{loginBean.user}" style="text-transform: uppercase" requiredMessage="Por favor ingrese su nombre de usuario." 
+                                                         autocomplete="false" class="form-control " id="txtuser" required="true">
+                                            </h:inputText>
+                                            <label data-error="wrong" data-success="right" for="modalLRInput10">Your email</label>
+                                        </div>
 
-                                    <div class="md-form form-sm mb-4">
-                                        <i class="fas fa-lock prefix"></i>
-                                        <input type="password" id="modalLRInput11" class="form-control form-control-sm validate"></input>
+                                        <div class="md-form form-sm mb-4">
+                                            <i class="fa fa-lock prefix"></i>
+                                            <h:inputSecret value="#{loginBean.pass}" validatorMessage="Formato de contraseña inválida. No se permiten carácteres especiales." 
+                                                           requiredMessage="Por favor ingrese su contraseña." autocomplete="false" id="txtPass" class="form-control " required="true">
+                                            </h:inputSecret>
                                             <label data-error="wrong" data-success="right" for="modalLRInput11">Your password</label>
+                                        </div>
+                                        <div class="text-center mt-2">
+                                            <h:commandButton action="#{loginBean.autenticar}" class="btn btn-info btn-submit right" value="Iniciar Sesión">
+                                                <f:ajax execute="frmLogin:txtuser frmLogin:txtPass"></f:ajax>
+                                            </h:commandButton>
+                                        </div>
                                     </div>
-                                    <div class="text-center mt-2">
-                                        <button class="btn btn-info">Log in <i class="fas fa-sign-in ml-1"></i></button>
-                                    </div>
-                                </div>
+                                </h:form>
                                 <!--Footer-->
                                 <div class="modal-footer">
-                                    <div class="options text-center text-md-right mt-1">
-                                        <p>Not a member? <a href="#" class="blue-text">Sign Up</a></p>
-                                        <p>Forgot <a href="#" class="blue-text">Password?</a></p>
-                                    </div>
+                                    <!--                                    <div class="options text-center text-md-right mt-1">
+                                                                            <p>Not a member? <a href="#" class="blue-text">Sign Up</a></p>
+                                                                            <p>Forgot <a href="#" class="blue-text">Password?</a></p>
+                                                                        </div>-->
                                     <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
                                 </div>
 
@@ -1046,35 +946,81 @@
                             <!--/.Panel 7-->
 
                             <!--Panel 8-->
-                            <div class="tab-pane fade" id="panel8" role="tabpanel">
+                            <div class="tab-pane" id="panel8" role="tabpanel">
 
                                 <!--Body-->
                                 <div class="modal-body">
-                                    <div class="md-form form-sm mb-5">
-                                        <i class="fas fa-envelope prefix"></i>
-                                        <input type="email" id="modalLRInput12" class="form-control form-control-sm validate"></input>
-                                            <label data-error="wrong" data-success="right" for="modalLRInput12">Your email</label>
-                                    </div>
+                                    <div>
+                                        <h:form id="frmRegistrar">
+                                            <div class="col-md-6 md-form form-sm mb-5">
+                                                <label data-error="wrong" data-success="right" for="modalLRInput13">Primer nombre</label>
+                                                <h:inputText value="#{loginBean.personas.pernombre1}" style="text-transform: uppercase" requiredMessage="Por favor ingrese su nombre de usuario." 
+                                                             autocomplete="false" class="form-control " id="txtNombre1" required="true">
+                                                </h:inputText>
+                                            </div>
+                                            <div class="col-md-6 md-form form-sm mb-5">
+                                                <label data-error="wrong" data-success="right" for="modalLRInput13">Segundo nombre</label>
+                                                <h:inputText value="#{loginBean.user}" style="text-transform: uppercase" requiredMessage="Por favor ingrese su nombre de usuario." 
+                                                             autocomplete="false" class="form-control " id="txtNombre2" required="true">
+                                                </h:inputText>
+                                            </div>
+                                            <div class="col-md-6 md-form form-sm mb-5">
+                                                <label data-error="wrong" data-success="right" for="modalLRInput13">Primer Apellido</label>
+                                                <h:inputText value="#{loginBean.user}" style="text-transform: uppercase" requiredMessage="Por favor ingrese su nombre de usuario." 
+                                                             autocomplete="false" class="form-control " id="txtApellido1" required="true">
+                                                </h:inputText>
+                                            </div>
+                                            <div class="col-md-6 md-form form-sm mb-5">
+                                                <label data-error="wrong" data-success="right" for="modalLRInput13">Segundo Apellido</label>
+                                                <h:inputText value="#{loginBean.user}" style="text-transform: uppercase" requiredMessage="Por favor ingrese su nombre de usuario." 
+                                                             autocomplete="false" class="form-control " id="txtApellido2" required="true">
+                                                </h:inputText>
+                                            </div>
 
-                                    <div class="md-form form-sm mb-5">
-                                        <i class="fas fa-lock prefix"></i>
-                                        <input type="password" id="modalLRInput13" class="form-control form-control-sm validate"></input>
-                                            <label data-error="wrong" data-success="right" for="modalLRInput13">Your password</label>
-                                    </div>
+                                            <div class="col-md-6">
+                                                <label data-error="wrong" data-success="right" for="modalLRInput12">Tipo de Documento</label>
+                                                <h:selectOneMenu  id="sltDocumentos" class="form-control" value="#{loginBean.tipoDocPer}">
+                                                    <f:selectItems value="#{loginBean.tiposdocumentos}" var="tipoDocumento" itemValue="#{tipoDocumento.tipdocid}" itemLabel="#{tipoDocumento.tipdocdescripcion}"></f:selectItems>
+                                                </h:selectOneMenu>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label data-error="wrong" data-success="right" for="modalLRInput12">N° Documento</label>
+                                                <h:inputText value="#{loginBean.user}" style="text-transform: uppercase" requiredMessage="Por favor ingrese su nombre de usuario." 
+                                                             class="form-control " id="txtDocumento" required="true">
+                                                </h:inputText>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label data-error="wrong" data-success="right" for="modalLRInput12">E-mail.</label>
+                                                <h:inputText value="#{loginBean.user}" style="text-transform: uppercase" requiredMessage="Por favor ingrese su nombre de usuario." 
+                                                             class="form-control" id="txtEmail" required="true">
+                                                </h:inputText>
+                                            </div>
 
-                                    <div class="md-form form-sm mb-4">
-                                        <i class="fas fa-lock prefix"></i>
-                                        <input type="password" id="modalLRInput14" class="form-control form-control-sm validate"></input>
-                                            <label data-error="wrong" data-success="right" for="modalLRInput14">Repeat password</label>
-                                    </div>
+                                            <div class="col-md-6 md-form form-sm mb-4">
+                                                <label data-error="wrong" data-success="right" for="modalLRInput14">Contraseña</label>
+                                                <h:inputSecret value="#{loginBean.pass}" validatorMessage="Formato de contraseña inválida. No se permiten carácteres especiales." 
+                                                               requiredMessage="Por favor ingrese su contraseña." autocomplete="false" id="txtPass" class="form-control " required="true">
+                                                </h:inputSecret>
+                                            </div> 
+                                            <br/>
 
-                                    <div class="text-center form-sm mt-2">
-                                        <button class="btn btn-info">Sign up <i class="fas fa-sign-in ml-1"></i></button>
-                                    </div>
 
+
+                                            <!--                                        <div class="text-center form-sm mt-2">
+                                                                                        <button class="btn btn-info">Sign up <i class="fa fa-sign-in ml-1"></i></button>
+                                                                                    </div>-->
+                                            <div class="options text-right">
+                                                <label>&nbsp;</label>
+                                                <h:commandLink class="btn btn-info" value="Registrar" >
+                                                    <f:ajax event="click" execute="frmRegistra" listener="#{loginBean.registrarUser()}"></f:ajax>
+                                                </h:commandLink>
+                                            </div>
+                                        </h:form>
+                                    </div>
                                 </div>
                                 <!--Footer-->
                                 <div class="modal-footer">
+
                                     <div class="options text-right">
                                         <p class="pt-1">Already have an account? <a href="#" class="blue-text">Log In</a></p>
                                     </div>
@@ -1100,6 +1046,8 @@
         <script src="js/nouislider.min.js"></script>
         <script src="js/jquery.zoom.min.js"></script>
         <script src="js/main.js"></script>
+        <br />
+        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
     </h:body>
 </html>
 

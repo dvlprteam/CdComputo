@@ -27,6 +27,8 @@ public class IndexBeans {
     private Client client;
     private List<ProductUrl> productUrls;
     private IndexBo indexBo;
+    private List<ProductUrl> productCar;
+    private  double subTotal;
 
     /**
      * Creates a new instance of IndexBeans
@@ -38,12 +40,22 @@ public class IndexBeans {
     public void init() {
         setClient(ClientBuilder.newClient());
         setProductUrls(new ArrayList<>());
+        setProductCar(new ArrayList<>());
         setIndexBo(new IndexImpBO());
         try {
             getIndexBo().getAllProduct(this);
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
+    }
+    
+    
+    public void addCar(ProductUrl  productUrl){
+        try {
+            getIndexBo().addCar(this,productUrl);
+        } catch (Exception e) {
+        }
     }
 
     /**
@@ -86,6 +98,34 @@ public class IndexBeans {
      */
     public void setIndexBo(IndexBo indexBo) {
         this.indexBo = indexBo;
+    }
+
+    /**
+     * @return the productCar
+     */
+    public List<ProductUrl> getProductCar() {
+        return productCar;
+    }
+
+    /**
+     * @param productCar the productCar to set
+     */
+    public void setProductCar(List<ProductUrl> productCar) {
+        this.productCar = productCar;
+    }
+
+    /**
+     * @return the subTotal
+     */
+    public double getSubTotal() {
+        return subTotal;
+    }
+
+    /**
+     * @param subTotal the subTotal to set
+     */
+    public void setSubTotal(double subTotal) {
+        this.subTotal = subTotal;
     }
 
 }

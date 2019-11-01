@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/10/2019 07:41:37 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.ecommerce.modelo.Tiposdocumento" table="tiposdocumento" schema="public" optimistic-lock="version">
+        <id name="tipdocid" type="int">
+            <column name="tipdocid" />
+            <generator class="increment" />
+        </id>
+        <property name="tipdocdescripcion" type="string">
+            <column name="tipdocdescripcion" length="100" not-null="true" />
+        </property>
+        <property name="tipdocalias" type="string">
+            <column name="tipdocalias" length="2" not-null="true" />
+        </property>
+        <property name="tipdocfechacreacion" type="date">
+            <column name="tipdocfechacreacion" length="13" not-null="true" />
+        </property>
+        <property name="tipdocfechainactivo" type="date">
+            <column name="tipdocfechainactivo" length="13" />
+        </property>
+        <property name="tipdocactivo" type="boolean">
+            <column name="tipdocactivo" not-null="true" />
+        </property>
+        <set name="personases" table="personas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipdocid" not-null="true" />
+            </key>
+            <one-to-many class="com.ecommerce.modelo.Personas" />
+        </set>
+    </class>
+</hibernate-mapping>

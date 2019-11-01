@@ -6,6 +6,7 @@
 package com.ecommerce.bo;
 
 import com.ecommerce.bean.IndexBeans;
+import com.ecommerce.bean.vo.ProductUrl;
 
 /**
  *
@@ -16,5 +17,8 @@ public interface IndexBo {
 
     
     void getAllProduct(IndexBeans indexBeans) throws Exception;
+    
+    
+    void addCar(IndexBeans indexBeans,ProductUrl productUrl)throws Exception;
     
 }

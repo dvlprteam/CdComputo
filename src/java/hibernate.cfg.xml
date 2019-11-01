@@ -18,5 +18,6 @@
         <mapping resource="com/ecommerce/modelo/Tiposusuario.hbm.xml"/>
         <mapping resource="com/ecommerce/modelo/Estadosdatospersona.hbm.xml"/>
         <mapping resource="com/ecommerce/modelo/Tiposdocumento.hbm.xml"/>
+        <mapping class="com.ecommerce.modelo.Imagenes"/>
     </session-factory>
 </hibernate-configuration>
