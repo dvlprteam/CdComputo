@@ -46,17 +46,17 @@ public class LoginBo {
 
     }
 
-    public void validarUser(BeanLogin login) {
+    public boolean validarUser(BeanLogin login) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Usuarios usuarios = getConsultasDAO().getUser(session, login.getUser(), login.getPass());
             if (usuarios == null) {
-                RequestContext.getCurrentInstance().execute("alert(User no encontrado)");
-                return;
+                return false;
             }
-            System.out.println("Sí se encontro el usuario");
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
+            throw new Exception(e);
         } finally {
             session.flush();
             session.close();
@@ -68,29 +68,64 @@ public class LoginBo {
         Transaction transaction = session.beginTransaction();
         try {
             Personas per = getConsultasDAO().getPersona(session, login.getTipoDocPer(), login.getPersonas().getPerdocumento());// Consulta en persona para saber si ya existe.
-            if (per == null) {
-                RequestContext.getCurrentInstance().execute("alert('Persona ya registrada en neustro sistema');");
+            if (per != null) {
+                RequestContext.getCurrentInstance().execute("Swal.fire({\n"
+                        + "  type: 'error',\n"
+                        + "  title: 'Oops...',\n"
+                        + "  text: 'Ya existes en nuestro sistema!'\n"
+                        + "});");
                 return false;
             }
             if (login.getPersonas().getPernombre1() == null) {
-                RequestContext.getCurrentInstance().execute("alert('Digite primer nombre.');");
+                RequestContext.getCurrentInstance().execute("Swal.fire({\n"
+                        + "  type: 'error',\n"
+                        + "  title: 'Validación...',\n"
+                        + "  text: 'Digite su primer nombre!'\n"
+                        + "});");
                 return false;
             }
-            if (login.getPersonas().getPerapellido1() == null) {
-                RequestContext.getCurrentInstance().execute("alert('Digite primer nombre.');");
+            if (login.getPersonas().getPernombre1() == null) {
+                RequestContext.getCurrentInstance().execute("Swal.fire({\n"
+                        + "  type: 'error',\n"
+                        + "  title: 'Validación...',\n"
+                        + "  text: 'Digite su primer apellido!'\n"
+                        + "});");
                 return false;
             }
+
+            if (login.getPersonas().getPerdocumento() == null) {
+                RequestContext.getCurrentInstance().execute("Swal.fire({\n"
+                        + "  type: 'error',\n"
+                        + "  title: 'Validación...',\n"
+                        + "  text: 'Digite su documento!'\n"
+                        + "});");
+                return false;
+            }
+            if (login.getPass().isEmpty() || login.getPass() == null) {
+                RequestContext.getCurrentInstance().execute("Swal.fire({\n"
+                        + "  type: 'error',\n"
+                        + "  title: 'Validación...',\n"
+                        + "  text: 'Digite su contraseña!'\n"
+                        + "});");
+                return false;
+            }
+
+            /* set persona*/
             login.getPersonas().setTipossexo(new Tipossexo(1, null, null, null, true));
             login.getPersonas().setTiposdocumento(new Tiposdocumento(login.getTipoDocPer(), null, null, null, true));
             login.getPersonas().setPerfechacreacion(new Date());
             login.getPersonas().setEstadospersona(new Estadospersona(1, null, null, true));
             getInsertDAO().createPersona(session, login.getPersonas());
+            /*Fin set */
+ /*set User*/
             Usuarios usuarios = new Usuarios();
             usuarios.setUsupass(DigestHandler.encryptSHA2(login.getPass()));
             usuarios.setEstadosusuario(new Estadosusuario(1, null, null, true));
             usuarios.setUsufechacreacion(new Date());
             usuarios.setUsunombre(login.getUser());
             usuarios.setPersonas(login.getPersonas());
+            getInsertDAO().createUsuario(session, usuarios);
+            /*Fin set user*/
             transaction.commit();
             return true;
         } catch (Exception e) {

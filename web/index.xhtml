@@ -22,6 +22,7 @@
         <!-- Slick -->
         <link type="text/css" rel="stylesheet" href="css/slick.css"/>
         <link type="text/css" rel="stylesheet" href="css/slick-theme.css"/>
+        <link type="text/css" rel="stylesheet" href="css/sweetalert2.min.css"/>
 
         <!-- nouislider -->
         <link type="text/css" rel="stylesheet" href="css/nouislider.min.css"/>
@@ -955,7 +956,7 @@
                                             <div class="col-md-6 md-form form-sm mb-5">
                                                 <label data-error="wrong" data-success="right" for="modalLRInput13">Primer nombre</label>
                                                 <h:inputText value="#{loginBean.personas.pernombre1}" style="text-transform: uppercase" requiredMessage="Por favor ingrese su nombre de usuario." 
-                                                             autocomplete="false" class="form-control " id="txtNombre1" required="true">
+                                                             autocomplete="false" class="form-control " id="txtNombre1" >
                                                 </h:inputText>
                                             </div>
                                             <div class="col-md-6 md-form form-sm mb-5">
@@ -1047,6 +1048,7 @@
         <script src="js/nouislider.min.js"></script>
         <script src="js/jquery.zoom.min.js"></script>
         <script src="js/main.js"></script>
+        <script src="js/sweetalert2.all.min.js"></script>
         <br />
         <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
     </h:body>

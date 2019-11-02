@@ -6,6 +6,7 @@
 package com.ecommerce.dao;
 
 import com.ecommerce.modelo.Personas;
+import com.ecommerce.modelo.Usuarios;
 import org.hibernate.Session;
 
 /**
@@ -15,4 +16,6 @@ import org.hibernate.Session;
 public interface InsertIT {
 
     void createPersona(Session session, Personas personas) throws Exception;
+    
+    void createUsuario(Session session, Usuarios usuario) throws Exception;
 }

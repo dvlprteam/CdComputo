@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -31,6 +33,7 @@ public class BeanLogin {
     private int tipoDocPer;
     private LoginBo loginBo;
     private Personas personas = new Personas();
+    private static final Pattern REGEXEMAIL = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 
     @PostConstruct
     public void init() {
@@ -44,19 +47,49 @@ public class BeanLogin {
         }
     }
 
-    public String autenticar() {
+    public void autenticar() {
         try {
-            getLoginBo().validarUser(this);
+            Matcher matcher = REGEXEMAIL.matcher(getUser());
+            if (!matcher.find()) {
+                RequestContext.getCurrentInstance().execute("Swal.fire({\n"
+                        + "  type: 'error',\n"
+                        + "  title: 'Oops...',\n"
+                        + "  text: 'Digite un correo valido'});");
+                return;
+            }
+            if (getPass().isEmpty() || getPass() != null) {
+                RequestContext.getCurrentInstance().execute("Swal.fire({\n"
+                        + "  type: 'error',\n"
+                        + "  title: 'Oops...',\n"
+                        + "  text: 'No se encontro el usuario, ¡por favor registrese!'\n"
+                        + "});");
+                return;
+            }
+            if (getLoginBo().validarUser(this)) {
+                RequestContext.getCurrentInstance().execute("Swal.fire({\n"
+                        + "  type: 'success',\n"
+                        + "  title: '¡Exitoso!',\n"
+                        + "  text: 'Usted ha iniciado sesión correctamente.'});");
+            } else {
+                RequestContext.getCurrentInstance().execute("Swal.fire({\n"
+                        + "  type: 'error',\n"
+                        + "  title: 'Oops...',\n"
+                        + "  text: 'No se encontro el usuario, ¡por favor registrese!'\n"
+                        + "});");
+
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "";
     }
 
     public void registrarUser() {
         try {
             if (getLoginBo().registrarPersona(this)) {
-                RequestContext.getCurrentInstance().execute("alert('Persona registrada exitosamente');");
+                RequestContext.getCurrentInstance().execute("Swal.fire({\n"
+                        + "  type: 'success',\n"
+                        + "  title: '¡Exitoso!',\n"
+                        + "  text: '¡Gracias por registrarte en nuestro sistema! Por favor inicie sessión'});");
             }
         } catch (Exception e) {
             e.printStackTrace();

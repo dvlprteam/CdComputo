@@ -6,6 +6,7 @@
 package com.ecommerce.dao;
 
 import com.ecommerce.modelo.Personas;
+import com.ecommerce.modelo.Usuarios;
 import org.hibernate.Session;
 
 /**
@@ -17,6 +18,11 @@ public class InsertDao implements InsertIT {
     @Override
     public void createPersona(Session session, Personas personas) throws Exception {
         session.save(personas);
+    }
+
+    @Override
+    public void createUsuario(Session session, Usuarios usuario) throws Exception {
+        session.save(usuario);
     }
 
 }
